@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.61'
+}
+
+group 'ru.nsu.fit.replica'
+version '1.0'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.zeromq:jeromq:0.5.1"
+    implementation "javax.cache:cache-api:1.1.1"
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    compile 'com.google.code.gson:gson:2.8.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
