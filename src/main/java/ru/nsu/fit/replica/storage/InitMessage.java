@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Map;
 
 @Data
-public class InitMessage {
-    private Map<String, String> storage;
+public class InitMessage<K,V> {
+    private Map<K, V> storage;
     private long lastId;
 }

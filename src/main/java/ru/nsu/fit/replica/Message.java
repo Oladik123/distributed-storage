@@ -1,30 +1,29 @@
 package ru.nsu.fit.replica;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Map;
 
 @Data
 public class Message implements Serializable {
-    public static final String ACTION_ID_HEADER_KEY = "action_id";
-    public static final String KEY_HEADER_KEY = "key";
-    public static final String ACTION_HEADER_KEY = "action";
-    public static final String CLIENT_ID_HEADER_KEY = "client_id";
+    private byte[] data;
 
-    private String data;
-
-    private HashMap<String, String> headers = new HashMap<>(); // иначе ломбок делает immutable map в которой не работает put
-
-    public void setHeaders(Map<String, String> headers) {
-        this.headers.clear();
-        this.headers.putAll(headers);
-    }
-
-    public Message() {}
-    public Message(String data, HashMap<String, String> headers) {
+    public Message(byte[] data) {
         this.data = data;
-        this.headers = headers;
     }
+
+    public Message() {
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
+    }
+
+    private Map<String, String> headers;
+
 }

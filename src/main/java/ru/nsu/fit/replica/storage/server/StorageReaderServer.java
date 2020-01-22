@@ -2,7 +2,7 @@ package ru.nsu.fit.replica.storage.server;
 
 import ru.nsu.fit.replica.storage.Storage;
 
-public interface StorageReaderServer extends Storage {
-    StorageWriterServer promoteToWriter();
-    void start();
+public interface StorageReaderServer<K, V> extends Storage<K, V> {
+    StorageWriterServer<K, V> promoteToWriter();
+    void initalSync();
 }

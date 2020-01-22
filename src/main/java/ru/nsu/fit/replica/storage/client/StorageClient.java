@@ -5,22 +5,17 @@ import ru.nsu.fit.replica.storage.Storage;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class StorageClient implements Storage {
+public class StorageClient<K, V> implements Storage<K, V> {
 
-    private Map<String, String> map = new ConcurrentHashMap<>();
+    private final Map<K, V> storage = new ConcurrentHashMap<>();
 
     @Override
-    public void put(String key, String value) {
-        map.put(key, value);
+    public void put(K key, V value) {
+        storage.put(key, value);
     }
 
     @Override
-    public String get(String key) {
-        return map.get(key);
-    }
-
-    @Override
-    public Map<String, String> getCurrentSnapshot() {
-        return new ConcurrentHashMap<>(map);
+    public V get(K key) {
+        return storage.get(key);
     }
 }

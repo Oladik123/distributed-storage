@@ -2,9 +2,7 @@ package ru.nsu.fit.replica.storage;
 
 import ru.nsu.fit.replica.Message;
 
-public interface MessageConvertor {
-    Message toNetwork(StorageMessage message);
-    StorageMessage fromNetwork(Message message);
-    Message initToNetwork(InitMessage message);
-    InitMessage initFromNetwork(Message message);
+public interface MessageConvertor<K, V> {
+    Message toNetwork(StorageMessage<K, V> message);
+    StorageMessage<K, V> fromNetwork(Message message);
 }

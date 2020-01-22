@@ -1,9 +1,6 @@
 package ru.nsu.fit.replica.storage;
 
-import java.util.Map;
-
-public interface Storage {
-    void put(String key, String value);
-    String get(String key);
-    Map<String, String> getCurrentSnapshot();
+public interface Storage<K, V> {
+    void put(K key, V value);
+    V get(K key);
 }
