@@ -31,7 +31,7 @@ public class StorageReaderServerImpl<K, V> implements StorageReaderServer<K, V> 
     }
 
     @Override
-    public void initalSync() {
+    public void initialSync() {
         while (!Thread.currentThread().isInterrupted()) {
             StorageMessage<K, V> message = convertor.fromNetwork(new Message(socket.recv(0)));
             System.out.println(this + " received msg");

@@ -13,28 +13,33 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        final StorageWriterServer<String, String> writer = new StorageWriterServerImpl<>();
-        final ArrayList<StorageReaderServer<String, String>> readers = new ArrayList<>();
+        var writer = new StorageWriterServerImpl<>();
+        ArrayList<StorageReaderServer<String, String>> readers = new ArrayList<>();
+
         Thread.sleep(1000);
         for (int i = 0; i < 5; i++) {
             readers.add(new StorageReaderServerImpl<>());
         }
-        final List<Thread> threads = readers.stream().map(r -> new Thread(r::initalSync)).collect(Collectors.toList());
-        threads.forEach(Thread::start);
 
-        final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        readers.stream()
+                .map(r -> new Thread(r::initialSync))
+                .forEach(Thread::start);
+
+        var input = new BufferedReader(new InputStreamReader(System.in));
+
         System.out.println("Ready");
         System.out.print("> ");
+
         input.lines().forEach(s -> {
             if (s.startsWith("put")) {
-                String[] words = s.split(" ");
+                var words = s.split(" ");
                 if (words.length != 3) {
                     System.err.println("error");
                     return;
                 }
                 writer.put(words[1], words[2]);
             } else if (s.startsWith("get")) {
-                String[] words = s.split(" ");
+                var words = s.split(" ");
                 if (words.length != 2) {
                     System.err.println("error");
                 } else {
